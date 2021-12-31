@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta charset="utf-8">	
+<title>Cookies</title>
+<script>
+var text="";
+function init() {
+	if(document.cookie){
+text=document.cookie.split(',');
+document.getElementsByName('ein')[0].value="";
+document.getElementsByName('ein')[1].value="";
+if(window.prompt("Password:")===text[1]){
+ausgabe(text[0]);
+}	
+else{
+	window.alert("Wrong. Resetting Cookie.");
+	document.cookie = ""; 
+	ausgabe("none");
+	}
+}
+}
+function eingabe(){
+document.cookie=[document.getElementsByName('ein')[0].value,document.getElementsByName('ein')[1].value];	
+	}
+function ausgabe(text) {
+  var ausgabe = document.getElementsByName('anzeige')[0];
+  ausgabe.innerHTML = text;
+}
+
+window.addEventListener('DOMContentLoaded', init);
+</script>	
+</head>
+<body>
+<h1>Use a cookie to save data.</h1>
+Content Last Time:
+<p name="anzeige"></p>
+<br><br>
+Content:
+<br>
+<textarea name="ein"></textarea>
+<br>
+Password: 
+<br>
+<input name="ein">
+<button onclick="eingabe();">Save</button><br>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<html>	<head>
+		<meta charset="utf-8">
+	<style>
+		button{width:50px}
+		input{width:200px;font-family:mono}
+		#rechnung{}
+		#ergebnis{}
+		iframe{background:none;}
+	</style>
+	<script>
+			var result="";
+			function addtoterm(charx){
+			document.getElementById('rechnung').value+=charx;
+			}
+			function reset(){
+			document.getElementById('rechnung').value="";
+			document.getElementById('ergebnis').value="";
+			}
+			function deletec(){
+			var oldn=document.getElementById('rechnung').value;
+			var newn=oldn.slice(0,oldn.length-1);
+			document.getElementById('rechnung').value=newn;
+				}
+			function calculate(){
+			var term=document.getElementById('rechnung').value;
+			term=term.replace(/x/,'*');
+			term=term.replace(/:/,'/');	
+			result=eval(term);
+			if(result===NaN){
+			result="Mathematisch Inkorrekt";
+			document.getElementById('ergebnis').value=result;
+			result="";
+				}
+			else if(result===undefined){
+			result="Nicht Definiert";
+			document.getElementById('ergebnis').value=result;
+			result="";
+				}
+			else{
+				document.getElementById('ergebnis').value=result;
+				}		
+				}	
+	</script>
+	</head>
+	<body>
+		
+		<input type="text"readonly id="rechnung"><br>
+		<input type="text"readonly id="ergebnis"><br>
+		<button onclick="addtoterm(1)">1</button><button onclick="addtoterm(2)">2</button><button onclick="addtoterm(3)">3</button><button onclick='addtoterm(":")'>:</button><br>
+		<button onclick="addtoterm(4)">4</button><button onclick="addtoterm(5)">5</button><button onclick="addtoterm(6)">6</button><button onclick='addtoterm("x")'>x</button><br>
+		<button onclick="addtoterm(7)">7</button><button onclick="addtoterm(8)">8</button><button onclick="addtoterm(9)">9</button><button onclick='addtoterm("-")'>-</button><br>
+		<button onclick="addtoterm(0)">0</button><button onclick='addtoterm("(")'>(</button><button onclick='addtoterm(")")'>)</button><button onclick='addtoterm("+")'>+</button><br>
+		<button onclick="deletec()">del</button><button onclick="reset()">AC</button><button onclick="addtoterm(result)">Ans</button><button onclick="calculate()">=</button><br>
+		
+	</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>COLOR-Mixer</title>
+		<script type="text/javascript">
+			window.addEventListener("DOMContentLoaded",reset);
+			window.addEventListener("DOMContentLoaded",hide);
+			window.addEventListener("input",calculate);
+			
+			function calculate(){
+				var r=document.getElementsByTagName('input')[0].value*256/100;
+				var g=document.getElementsByTagName('input')[1].value*256/100;
+				var b=document.getElementsByTagName('input')[2].value*256/100;
+				var a=document.getElementsByTagName('input')[3].value*1/100;				
+				document.getElementById('out').style.background="rgba("+r+","+g+","+b+","+a+")";
+				var darkness=1-document.getElementsByTagName('input')[4].value*1/100;
+				document.getElementById('hide').style.opacity=darkness;
+				}
+			function reset(){
+				document.getElementsByTagName('input')[0].value=50;
+				document.getElementsByTagName('input')[1].value=50;
+				document.getElementsByTagName('input')[2].value=50;
+				document.getElementsByTagName('input')[3].value=50;
+				document.getElementsByTagName('input')[4].value=50;
+				calculate();
+
+				}
+			function save(){
+				document.cookie=document.getElementsByName('out')[0].style.backgroundColor;
+				}		
+			function load(){
+				if(document.cookie){
+					document.getElementById('out').style.backgroundColor=document.cookie;
+				}
+				else{
+					window.alert("Keine Farbe Abgespeichert!");
+					}
+				
+				}
+			function hide(){
+			document.getElementById('hide').style.left=document.getElementById('out').style.left;
+			document.getElementById('hide').style.top=document.getElementById('out').style.top;
+			
+				}		
+		</script>
+		<style>
+			input{position:absolute;left:140px}
+		</style>
+	</head>
+	<body>
+		<div style="background:red;width:130px;position:absolute;left:10px"><center>RED</center></div><input type="range" ><br>
+		<div style="background:green;width:130px;position:absolute;left:10px"><center>GREEN</center></div><input type="range"><br>
+		<div style="background:blue;width:130px;position:absolute;left:10px"><center>BLUE</center></div><input type="range"><br>
+		<div style="background:white;width:130px;position:absolute;left:10px"><center>SATURATION</center></div><input type="range"><br>
+		<div style="background:white;width:130px;position:absolute;left:10px"><center>BRIGHTNESS</center></div><input type="range"><br><br>
+		
+	<!--	<button onclick="reset();calculate()">FARBE ZURÜCKSETZTEN</button><button onclick="save()">FARBE SPEICHERN</button><button onclick="load()">FARBE LADEN</button><br><br>-->
+		<div id="hide"style="width:150px;height:150px;position:absolute;background-color:black"></div>
+		<div id="out"style="width:150px;height:150px;top:150px;left:10px;position:absolute"></div>
+		
+		
+		
+
+	</body>
+</html>
